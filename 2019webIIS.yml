@@ -1,0 +1,34 @@
+---
+-
+  hosts: all
+  tasks:
+    -
+      name: "Copy PowerShell script to windows"
+      win_copy:
+        dest: "C:\\temp\\iisinstall.ps1"
+        remote_dest: true
+        src: iisinstall.ps1
+    -
+      name: "Run remote PowerShell script"
+      win_shell: "C:\\temp\\iisinstall.ps1 >> c:\\Temp\\iislog.txt"
+
+
+#hosts: all
+#  tasks:
+#
+#   - name: Run remote PowerShell script
+#     win_shell: C:\temp\iisinstall.ps1 >> c:\iislog.txt
+#   - name: IIS Install
+#     win_copy:
+#        src: microsoft-windows-netfx3-ondemand-package.cab
+#        dest: C:\temp\microsoft-windows-netfx3-ondemand-package.cab
+#        remote_dest: yes
+#
+#   - name: IIS Install
+#     win_feature:
+#       name: Web-Server
+#       source: C:\Temp
+#       state: present
+#       restart: yes
+#       include_sub_features: yes
+#       include_management_tools: yes
